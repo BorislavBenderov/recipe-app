@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { PopularRecipes } from "./components/popular-recipes/PopularRecipes";
 
 function App() {
-  
+
+
   return (
     <div className="App">
-      Hello world
+      <PopularRecipes />
     </div>
   );
 }

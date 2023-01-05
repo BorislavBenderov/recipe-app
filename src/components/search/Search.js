@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { fetchSearch } from "../../api";
 
 export const Search = () => {
     const [query, setQuery] = useState('');
     const [search, setSearch] = useState([]);
+    const navigate = useNavigate();
 
     const onSearch = (e) => {
         e.preventDefault();
@@ -11,6 +13,7 @@ export const Search = () => {
         fetchSearch(query)
             .then((data) => {
                 setSearch(data);
+                navigate(`/search/${query}`);
             })
     }
 

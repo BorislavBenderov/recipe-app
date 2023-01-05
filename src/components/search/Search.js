@@ -1,33 +1,30 @@
-import { useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { fetchSearch } from "../../api";
+import { RecipeContext } from "../../contexts/RecipeContext";
 
 export const Search = () => {
-    const [query, setQuery] = useState('');
-    const [search, setSearch] = useState([]);
+    const { onSearch } = useContext(RecipeContext);
+    const [searchWord, setSearchWord] = useState('');
     const navigate = useNavigate();
 
-    const onSearch = (e) => {
+    const onSearchClick = (e) => {
         e.preventDefault();
 
-        fetchSearch(query)
-            .then((data) => {
-                setSearch(data);
-                navigate(`/search/${query}`);
-            })
+        onSearch(searchWord);
+        navigate(`/search/${searchWord}`);
     }
 
     return (
         <div className="w-60 mx-auto mt-6">
-            <form onSubmit={onSearch}>
+            <form onSubmit={onSearchClick}>
                 <label htmlFor="search" />
                 <input
                     className='w-60 bg-black text-white'
                     type="text"
                     placeholder="Search recipes" id="search"
                     name="search"
-                    value={query}
-                    onChange={(e) => setQuery(e.target.value)} />
+                    value={searchWord}
+                    onChange={(e) => setSearchWord(e.target.value)} />
             </form>
         </div>
     );

@@ -16,19 +16,11 @@ export const PopularRecipes = () => {
     }, []);
 
     return (
-        <>
-            <div className="w-60 mx-auto mt-6">
-                <form>
-                    <label htmlFor="search" />
-                    <input className='w-60 bg-black text-white' type="text" placeholder="Search recipes" id="search" name="search" />
-                </form>
+        <div className="max-w-5xl mx-auto mt-24">
+            <h1 className="text-xl font-bold text-center">Popular Recipes</h1>
+            <div className="flex flex-wrap justify-between">
+                {randomRecipes.map((recipe) => <PopularRecipeCard key={recipe.id} recipe={recipe} />)}
             </div>
-            <div className="max-w-5xl mx-auto mt-24">
-                <h1 className="text-xl font-bold text-center">Popular Recipes</h1>
-                <div className="flex flex-wrap justify-between">
-                    {randomRecipes.map((recipe) => <PopularRecipeCard key={recipe.id} recipe={recipe} />)}
-                </div>
-            </div>
-        </>
+        </div>
     );
 }

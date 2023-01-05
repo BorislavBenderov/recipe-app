@@ -1,19 +1,9 @@
-import { useEffect, useState } from "react";
-import { fetchRandomRecipes } from "../../api/index";
+import { useContext } from "react";
 import { PopularRecipeCard } from "./PopularRecipeCard";
+import { RecipeContext } from "../../contexts/RecipeContext";
 
 export const PopularRecipes = () => {
-    const [randomRecipes, setRandomRecipes] = useState([]);
-
-    useEffect(() => {
-        fetchRandomRecipes()
-            .then(data => {
-                setRandomRecipes(data.recipes);
-            })
-            .catch((err) => {
-                alert(err.message);
-            })
-    }, []);
+    const { randomRecipes } = useContext(RecipeContext);
 
     return (
         <div className="max-w-5xl mx-auto mt-24">

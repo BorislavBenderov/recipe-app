@@ -1,26 +1,24 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 import { fetchRandomRecipes } from "../api";
+import { useQuery } from "@tanstack/react-query";
 
 export const RecipeContext = createContext();
 
 export const RecipeContextProvider = ({ children }) => {
-    const [randomRecipes, setRandomRecipes] = useState([]);
-    const [query, setQuery] = useState('');
+  const [query, setQuery] = useState("");
 
-    useEffect(() => {
-        fetchRandomRecipes()
-            .then((res) => {
-                setRandomRecipes(res.recipes);
-            })
-    }, []);
+  const {
+    data: randomRecipes,
+    isLoading,
+    isError,
+  } = useQuery(["recipes"], fetchRandomRecipes);
 
-    const onSearch = (searchWord) => {
-        setQuery(searchWord);
-    }
-
-    return (
-        <RecipeContext.Provider value={{ randomRecipes, query, onSearch }}>
-            {children}
-        </RecipeContext.Provider>
-    );
-}
+  const onSearch = (searchWord) => {
+    setQuery(searchWord);
+  };
+  return (
+    <RecipeContext.Provider value={{ randomRecipes, query, onSearch }}>
+      {children}
+    </RecipeContext.Provider>
+  );
+};

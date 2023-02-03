@@ -17,7 +17,9 @@ export const RecipeContextProvider = ({ children }) => {
     setQuery(searchWord);
   };
   return (
-    <RecipeContext.Provider value={{ randomRecipes, query, onSearch }}>
+    <RecipeContext.Provider
+      value={{ randomRecipes, isLoading, query, onSearch }}
+    >
       {children}
     </RecipeContext.Provider>
   );

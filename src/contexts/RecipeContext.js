@@ -11,6 +11,7 @@ export const RecipeContextProvider = ({ children }) => {
     data: randomRecipes,
     isLoading,
     isError,
+    error,
   } = useQuery(["recipes"], fetchRandomRecipes);
 
   const onSearch = (searchWord) => {
@@ -18,7 +19,7 @@ export const RecipeContextProvider = ({ children }) => {
   };
   return (
     <RecipeContext.Provider
-      value={{ randomRecipes, isLoading, query, onSearch }}
+      value={{ randomRecipes, isLoading, isError, error, query, onSearch }}
     >
       {children}
     </RecipeContext.Provider>

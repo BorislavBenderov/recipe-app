@@ -7,10 +7,10 @@ export const fetchRandomRecipes = async () => {
   return response.data.recipes;
 };
 
-export const fetchSearch = (query) => {
-  return fetch(
+export const fetchSearch = async (query) => {
+  const response = await axios.get(
     `https://api.spoonacular.com/recipes/complexSearch?apiKey=${process.env.REACT_APP_API_KEY}&query=${query}&number=9`
-  ).then((res) => {
-    return res.json();
-  });
+  );
+  console.log(response.data.results);
+  return response.data.results;
 };
